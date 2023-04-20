@@ -4,3 +4,59 @@
 
 Helm chart for `grafana-dashboards`. Details included in `README.md`.
 
+## How to install this chart
+
+```console
+helm repo add roberc7 https://raw.githubusercontent.com/roberc7/helm-charts/*
+```
+
+Installing a chart with default values:
+
+```console
+helm install roberc7/grafana-dashboards
+```
+
+Installing a chart with a named release.
+
+```console
+helm install my-release roberc7/grafana-dashboards
+```
+
+Installing a chart with set values:
+
+```console
+helm install my-release roberc7/grafana-dashboards --set values_key1=value1 --set values_key2=value2
+```
+
+Installing a chart with custom values:
+
+```console
+helm install my-release roberc7/grafana-dashboards -f values.yaml
+```
+
+## Requirements
+
+Kubernetes: `>=1.24.0-0`
+
+## Values
+
+| Key | Type | Default | Description |
+|-----|------|---------|-------------|
+| commonLabels | object | `{}` |  |
+| config.cloudwatch_uid | string | `"dummy"` |  |
+| config.env | string | `"dummy"` |  |
+| config.graphql_api_id | string | `"dummy"` |  |
+| config.loki_uid | string | `"dummy"` |  |
+| config.microservice_folderid | string | `"0"` |  |
+| config.msk_cluster_name | string | `"dummy"` |  |
+| enabled | bool | `true` |  |
+| fullnameOverride | string | `nil` |  |
+| label | string | `"grafana_dashboard"` |  |
+| nameOverride | string | `nil` |  |
+| namespaceOverride | string | `nil` |  |
+
+## Maintainers
+
+| Name | Email | Url |
+| ---- | ------ | --- |
+| roberc7 | <callum.robertson@airnz.co.nz> | <https://github.com/roberc7> |
