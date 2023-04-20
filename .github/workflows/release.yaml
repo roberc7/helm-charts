@@ -5,6 +5,9 @@ on:
     workflows: ["Chart Packaging"]
     types:
       - completed
+  push:
+    branches:
+      - main
 
 permissions: {}
 jobs:
