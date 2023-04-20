@@ -1,1 +1,104 @@
 apiVersion: v1
+entries:
+  argo:
+  - apiVersion: v2
+    appVersion: v2.6.1
+    created: "2023-04-20T23:31:32.993840036Z"
+    dependencies:
+    - condition: argo-cd.enabled
+      name: argo-cd
+      repository: https://argoproj.github.io/argo-helm
+      tags:
+      - argo-cd
+      version: 4.5.7
+    - condition: argo-rollouts.enabled
+      name: argo-rollouts
+      repository: https://argoproj.github.io/argo-helm
+      tags:
+      - argo-rollouts
+      version: 2.20.0
+    - condition: argo-workflows.enabled
+      name: argo-workflows
+      repository: https://argoproj.github.io/argo-helm
+      tags:
+      - argo-workflows
+      version: 0.17.1
+    - condition: argo-events.enabled
+      name: argo-events
+      repository: https://argoproj.github.io/argo-helm
+      tags:
+      - argo-events
+      version: 2.0.4
+    description: Helm chart for `argo`. Details included in `README.md`.
+    digest: 85880a9312663ac2715d4d94e65e82043d46e19baf060b918b4dd0e03fe0ccf9
+    home: https://github.com/roberc7/helm-charts
+    keywords:
+    - argo
+    kubeVersion: '>=1.24.0-0'
+    maintainers:
+    - email: callum.robertson@airnz.co.nz
+      name: roberc7
+      url: https://github.com/roberc7
+    name: argo
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/roberc7/helm-charts/gh-pages/argo-1.5.8.tgz
+    version: 1.5.8
+  external-secrets:
+  - apiVersion: v2
+    appVersion: 0.7.2
+    created: "2023-04-20T23:31:32.994792435Z"
+    description: Helm chart for `external-secrets`. Details included in `README.md`.
+    digest: a3ed9fb4c90387d17de66bc1f06d1adb6bf895f52a20f3afbef5b46633a8e6e7
+    home: https://github.com/roberc7/helm-charts
+    keywords:
+    - externalsecret
+    kubeVersion: '>=1.24.0-0'
+    maintainers:
+    - email: callum.robertson@airnz.co.nz
+      name: roberc7
+      url: https://github.com/roberc7
+    name: external-secrets
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/roberc7/helm-charts/gh-pages/external-secrets-1.1.0.tgz
+    version: 1.1.0
+  grafana-dashboards:
+  - apiVersion: v2
+    appVersion: 9.0.5
+    created: "2023-04-20T23:31:32.998065733Z"
+    description: Helm chart for `grafana-dashboards`. Details included in `README.md`.
+    digest: 904e4324c6673c0be2ec39f968b24a0d92323bd3586a3c8c33f1638bb82ab043
+    keywords:
+    - grafana
+    - dashboards
+    kubeVersion: '>=1.24.0-0'
+    maintainers:
+    - email: callum.robertson@airnz.co.nz
+      name: roberc7
+      url: https://github.com/roberc7
+    name: grafana-dashboards
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/roberc7/helm-charts/gh-pages/grafana-dashboards-1.0.0.tgz
+    version: 1.0.0
+  microservice-basic:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2023-04-20T23:31:32.999806631Z"
+    description: Helm chart for `microservice-basic`. Details included in `README.md`.
+    digest: 07800200dc166f455d60761fbc1f36b312bdd8a6859de08ae715ad0653aafc90
+    home: https://github.com/roberc7/helm-charts
+    keywords:
+    - microservice
+    kubeVersion: '>=1.24.0-0'
+    maintainers:
+    - email: callum.robertson@airnz.co.nz
+      name: roberc7
+      url: https://github.com/roberc7
+    name: microservice-basic
+    type: application
+    urls:
+    - https://raw.githubusercontent.com/roberc7/helm-charts/gh-pages/microservice-basic-1.2.3.tgz
+    version: 1.2.3
+generated: "2023-04-20T23:31:32.971715654Z"
