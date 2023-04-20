@@ -1,0 +1,14 @@
+enabled: true
+nameOverride:
+fullnameOverride:
+commonLabels: {}
+namespaceOverride:
+label: grafana_dashboard
+
+config:
+  microservice_folderid: "0"
+  loki_uid: "dummy"
+  cloudwatch_uid: "dummy"
+  env: "dummy"
+  graphql_api_id: "dummy"
+  msk_cluster_name: "dummy"

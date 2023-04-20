@@ -1,0 +1,68 @@
+{{ $global := . }}
+{{- range $applicationsets := .Values.applicationsets }}
+---
+{{- if $applicationsets.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: "{{ $applicationsets.name }}"
+  namespace: {{ $applicationsets.namespace }}
+spec:
+  generators:
+  - git:
+      repoURL: {{ $applicationsets.generators.git.repoURL }}
+      revision: {{ $applicationsets.generators.git.revision }}
+      {{- if $applicationsets.generators.git.directories }}
+      directories: 
+      {{ $applicationsets.generators.git.directories  | toYaml }}
+      {{- else if $applicationsets.generators.git.files }}
+      files: 
+      {{ $applicationsets.generators.git.files  | toYaml }}
+      {{- end }}
+  template:
+    metadata:
+      {{- if eq $applicationsets.type "app"  }}
+      name: "{{ $applicationsets.name }}"
+      {{- else }}
+      name: {{`'{{path.basename}}'`}}
+      {{- end }}
+      {{- if $applicationsets.labels }}
+      labels:
+        {{- $applicationsets.labels | toYaml | nindent 8}}
+      {{- end}}
+      annotations:
+        custom.argo-notifications-workaround: v1.1.1-bug
+        {{- if $applicationsets.annotations }}
+        {{- $applicationsets.annotations | toYaml | nindent 8}}
+        {{- end}}
+    spec:
+      project: {{ $applicationsets.project }}
+      {{- if $applicationsets.syncPolicy }}
+      syncPolicy:
+      {{ $applicationsets.syncPolicy  | toYaml | nindent 7 }}
+      {{- end }}
+      source:
+        repoURL: {{ $applicationsets.source.repoURL }}
+        targetRevision: {{ $applicationsets.source.targetRevision }}
+        path: {{`'{{path}}'`}}
+        {{- if $applicationsets.source.plugin }}
+        {{- with $applicationsets.source.plugin }}
+        plugin:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- end }}
+      {{- if $applicationsets.syncPolicy }}
+      syncPolicy:
+      {{ $applicationsets.syncPolicy  | toYaml | nindent 7 }}
+      {{- end }}
+      {{- if $applicationsets.source.helm.valueFiles }}
+        helm:
+          valueFiles:
+          {{ $applicationsets.source.helm.valueFiles  | toYaml }}
+        {{- end }}
+      destination:
+        server: {{ $applicationsets.destination.server }}
+        namespace: {{ $applicationsets.destination.namespace }}
+{{- end }}
+...
+{{- end }}

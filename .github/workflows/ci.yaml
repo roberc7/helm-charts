@@ -1,0 +1,27 @@
+name: Trigger CI Steps
+
+on:
+  pull_request:
+    branches: [main]
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+
+jobs:
+  call-check-codeowners:
+    uses: ./.github/workflows/check-codeowners.yaml
+    secrets: inherit
+
+  call-super-linter:
+    uses: ./.github/workflows/super-linter.yaml
+    secrets: inherit
+
+  call-ct-lint-test-install:
+    uses: ./.github/workflows/ct-lint-test-install.yaml
+    secrets: inherit
+
+  call-validate-pr:
+    uses: ./.github/workflows/validate-pr.yaml
+    secrets: inherit
