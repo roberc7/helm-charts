@@ -3,7 +3,7 @@ entries:
   argo:
   - apiVersion: v2
     appVersion: v2.6.1
-    created: "2023-04-20T23:31:32.993840036Z"
+    created: "2023-04-20T23:34:57.694859912Z"
     dependencies:
     - condition: argo-cd.enabled
       name: argo-cd
@@ -29,8 +29,14 @@ entries:
       tags:
       - argo-events
       version: 2.0.4
+    - condition: external-secret.enabled
+      name: external-secrets
+      repository: https://raw.githubusercontent.com/roberc7/helm-charts/gh-pages
+      tags:
+      - external-secrets
+      version: 1.1.0
     description: Helm chart for `argo`. Details included in `README.md`.
-    digest: 85880a9312663ac2715d4d94e65e82043d46e19baf060b918b4dd0e03fe0ccf9
+    digest: dcaeefa104c6ed00b0c0c35547774f9e0d72f8d493ee5ee9531f3765cc86457b
     home: https://github.com/roberc7/helm-charts
     keywords:
     - argo
@@ -47,9 +53,9 @@ entries:
   external-secrets:
   - apiVersion: v2
     appVersion: 0.7.2
-    created: "2023-04-20T23:31:32.994792435Z"
+    created: "2023-04-20T23:34:57.695568122Z"
     description: Helm chart for `external-secrets`. Details included in `README.md`.
-    digest: a3ed9fb4c90387d17de66bc1f06d1adb6bf895f52a20f3afbef5b46633a8e6e7
+    digest: 5e69bfaafb1677a4b2d1df551d2cf362d3fda0d55d90ea30f3f2b92246857ea3
     home: https://github.com/roberc7/helm-charts
     keywords:
     - externalsecret
@@ -66,9 +72,9 @@ entries:
   grafana-dashboards:
   - apiVersion: v2
     appVersion: 9.0.5
-    created: "2023-04-20T23:31:32.998065733Z"
+    created: "2023-04-20T23:34:57.697232547Z"
     description: Helm chart for `grafana-dashboards`. Details included in `README.md`.
-    digest: 904e4324c6673c0be2ec39f968b24a0d92323bd3586a3c8c33f1638bb82ab043
+    digest: e042f0f24c67066b6e080e3ba38d544b76c7c28b05c1dc45a270593309305a51
     keywords:
     - grafana
     - dashboards
@@ -85,9 +91,9 @@ entries:
   microservice-basic:
   - apiVersion: v2
     appVersion: 0.1.0
-    created: "2023-04-20T23:31:32.999806631Z"
+    created: "2023-04-20T23:34:57.697915457Z"
     description: Helm chart for `microservice-basic`. Details included in `README.md`.
-    digest: 07800200dc166f455d60761fbc1f36b312bdd8a6859de08ae715ad0653aafc90
+    digest: 4fe52fe853bbdcec5980ef7819d7781a42f2947b047747a2a3b0d61a16cf87a2
     home: https://github.com/roberc7/helm-charts
     keywords:
     - microservice
@@ -101,4 +107,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/roberc7/helm-charts/gh-pages/microservice-basic-1.2.3.tgz
     version: 1.2.3
-generated: "2023-04-20T23:31:32.971715654Z"
+generated: "2023-04-20T23:34:57.67222988Z"
