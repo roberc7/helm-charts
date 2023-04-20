@@ -1,10 +1,10 @@
 name: Chart Releaser
 
 on:
-  workflow_run:
-    workflows: ["Chart Packaging"]
-    types:
-      - completed
+  # workflow_run:
+  #   workflows: ["Chart Packaging"]
+  #   types:
+  #     - completed
   push:
     branches:
       - main
