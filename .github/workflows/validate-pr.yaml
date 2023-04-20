@@ -1,0 +1,43 @@
+name: Validate Pull Request Title & Contents
+
+on:
+  workflow_call:
+    inputs:
+      helm_version:
+        description: version of the helm binary
+        default: v3.8.2
+        required: false
+        type: string
+      python_version:
+        description: version of the python binary
+        default: 3.7
+        required: false
+        type: string
+
+jobs:
+  validate-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: ${{ inputs.helm_version }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ inputs.python_version }}
+
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@v2.0.1
+
+      - name: Validate PR
+        run: scripts/validate-pr.sh
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}

@@ -1,0 +1,121 @@
+name:
+fullNameOverride:
+namespaceOverride:
+
+externalSecrets:
+  - name: foo
+    labels:
+      bar: baz
+    annotations:
+      bar: baz
+    enabled: false
+    refreshInterval: 60
+    secretStoreRef:
+      name: airnz-poc
+      kind: SecretStore
+    data:
+      - secretKey: username
+        remoteRef:
+          key: airnz/poc/external-secret/foo
+          property: username
+  - name: bar
+    labels:
+      bar: baz
+    annotations:
+      bar: baz
+    enabled: false
+    refreshInterval: 60
+    secretStoreRef:
+      name: airnz-poc
+      kind: SecretStore
+    data:
+      - secretKey: password
+        remoteRef:
+          key: airnz/poc/external-secret/bar
+          property: password
+
+clusterSecretStores:
+  - name: airnz-poc-secretsmanager-sa
+    enabled: false
+    # Used to select the correct ESO controller (think: ingress.ingressClassName)
+    # The ESO controller is instantiated with a specific controller name
+    # and filters ES based on this property
+    # Optional
+    # controller: airnz-poc-external-secrets
+    retrySettings:
+      maxRetries: 5
+      retryInterval: "10s"
+    labels:
+      foo: bar
+    annotations:
+      foo: bar
+    provider:
+      aws:
+        service: SecretsManager
+        region: ap-southeast-2
+        auth:
+          jwt:
+            serviceAccountRef:
+              name: external-secrets
+  - name: airnz-poc-secretsmanager-role
+    enabled: false
+    # Used to select the correct ESO controller (think: ingress.ingressClassName)
+    # The ESO controller is instantiated with a specific controller name
+    # and filters ES based on this property
+    # Optional
+    # controller: airnz-poc-external-secrets
+    retrySettings:
+      maxRetries: 5
+      retryInterval: "10s"
+    labels:
+      bar: baz
+    annotations:
+      bar: baz
+    provider:
+      aws:
+        service: SecretsManager
+        region: ap-southeast-2
+        role: "arn:aws:iam::*:role/airnz-poc-external-secrets"
+
+secretStores:
+  - name: airnz-poc-secretsmanager-sa
+    enabled: false
+    # Used to select the correct ESO controller (think: ingress.ingressClassName)
+    # The ESO controller is instantiated with a specific controller name
+    # and filters ES based on this property
+    # Optional
+    # controller: airnz-poc-external-secrets
+    retrySettings:
+      maxRetries: 5
+      retryInterval: "10s"
+    labels:
+      foo: bar
+    annotations:
+      foo: bar
+    provider:
+      aws:
+        service: SecretsManager
+        region: ap-southeast-2
+        auth:
+          jwt:
+            serviceAccountRef:
+              name: external-secrets
+  - name: airnz-poc-secretsmanager-role
+    enabled: false
+    # Used to select the correct ESO controller (think: ingress.ingressClassName)
+    # The ESO controller is instantiated with a specific controller name
+    # and filters ES based on this property
+    # Optional
+    # controller: airnz-poc-external-secrets
+    retrySettings:
+      maxRetries: 5
+      retryInterval: "10s"
+    labels:
+      bar: baz
+    annotations:
+      bar: baz
+    provider:
+      aws:
+        service: SecretsManager
+        region: ap-southeast-2
+        role: "arn:aws:iam::*:role/airnz-poc-external-secrets"

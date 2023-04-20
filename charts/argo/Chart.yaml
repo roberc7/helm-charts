@@ -1,0 +1,50 @@
+apiVersion: v2
+appVersion: v2.6.1
+version: 1.5.8
+kubeVersion: ">=1.24.0-0"
+description: Helm chart for `argo`. Details included in `README.md`.
+name: argo
+home: https://github.com/roberc7/helm-charts
+type: application
+keywords:
+  - argo
+maintainers:
+  - name: roberc7
+    email: callum.robertson@airnz.co.nz
+    url: https://github.com/roberc7
+dependencies:
+  - name: argo-cd
+    version: "4.5.7"
+    repository: https://argoproj.github.io/argo-helm
+    condition: argo-cd.enabled
+    tags:
+      - argo-cd
+    import-values: []
+  - name: argo-rollouts
+    version: "2.20.0"
+    repository: https://argoproj.github.io/argo-helm
+    condition: argo-rollouts.enabled
+    tags:
+      - argo-rollouts
+    import-values: []
+  - name: argo-workflows
+    version: "0.17.1"
+    repository: https://argoproj.github.io/argo-helm
+    condition: argo-workflows.enabled
+    tags:
+      - argo-workflows
+    import-values: []
+  - name: argo-events
+    version: "2.0.4"
+    repository: https://argoproj.github.io/argo-helm
+    condition: argo-events.enabled
+    tags:
+      - argo-events
+    import-values: []
+  - name: external-secrets
+    version: "1.1.0"
+    repository: https://raw.githubusercontent.com/roberc7/helm-charts/gh-pages
+    condition: external-secret.enabled
+    tags:
+      - external-secrets
+    import-values: []

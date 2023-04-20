@@ -1,0 +1,121 @@
+{{- defineDatasource "config" .Env.README_YAML | regexp.Replace ".*" "" -}}
+
+# [Incubating] Roberc7 Chart Repository
+
+{{ if has (ds "config") "incubating" }}
+{{(ds "config").incubating }}
+{{- end }}
+
+{{ if has (ds "config") "contents" }}
+## Contents
+
+{{ (ds "config").contents }}
+{{ end }}
+
+---
+
+{{ if has (ds "config") "introduction" }}
+## Introduction
+
+{{ (ds "config").introduction }}
+{{ end }}
+
+{{ if has (ds "config") "contributing" }}
+## Contributing
+
+{{ (ds "config").contributing -}}
+{{ end }}
+
+{{ if has (ds "config") "technologies_used" }}
+## Technologies Used
+
+{{ (ds "config").technologies_used }}
+{{ end }}
+
+{{ if has (ds "config") "versioning" }}
+## Versioning
+
+{{ (ds "config").versioning }}
+{{ end }}
+
+{{ if has (ds "config") "conventional_commits" }}
+## Commit Standards
+
+{{ (ds "config").conventional_commits }}
+{{ end }}
+
+{{ if has (ds "config") "include" }}
+{{ range $file := (datasource "config").include -}}
+{{ (include "includes" $file) }}
+{{- end }}
+{{- end }}
+
+{{ if has (ds "config") "related" }}
+## Related Projects
+
+Check out these related projects.
+{{ range $related := (ds "config").related }}
+{{ printf "- [%s](%s) - %s" $related.name $related.url $related.description }}{{ end }}
+
+{{- end}}
+{{ if has (ds "config") "references" }}
+
+## References
+
+For additional context, refer to some of these links.
+{{ range $reference := (ds "config").references }}
+{{ printf "- [%s](%s) - %s" $reference.name $reference.url $reference.description }}{{ end }}
+
+{{ end}}
+
+{{ if eq (ds "config").license "APACHE2" }}
+## License
+
+It's 100% Open Source and licensed under the [APACHE2](LICENSE).
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+See [LICENSE](LICENSE) for full details.
+
+```text
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
+
+  https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+```
+{{ end }}
+
+{{ if has (datasource "config") "contributors" }}
+### Contributors
+
+<!-- markdownlint-disable -->
+| {{ range $contributor := (ds "config").contributors }}{{ printf " [![%s][%s_avatar]][%s_homepage]<br/>[%s][%s_homepage] |" $contributor.name $contributor.github $contributor.github $contributor.name $contributor.github}}{{ end }}
+|{{- range $contributor := (ds "config").contributors -}}---|{{ end }}
+<!-- markdownlint-restore -->
+
+{{ range $contributor := (ds "config").contributors -}}
+{{- if has $contributor "homepage" }}
+{{ printf "  [%s_homepage]: %s" $contributor.github $contributor.homepage }}
+{{ else -}}
+{{ printf "  [%s_homepage]: https://github.com/%s" $contributor.github $contributor.github }}
+{{ end -}}
+{{ if has $contributor "avatar" }}{{ printf "  [%s_avatar]: %s" $contributor.github $contributor.avatar }}
+{{ else -}}
+{{ printf "  [%s_avatar]: https://img.cloudposse.com/150x150/https://github.com/%s.png" $contributor.github $contributor.github }}
+{{- end }}
+{{ end }}
+{{ end }}
+
+{{- $utm_link := printf "%%s?utm_source=%s&utm_medium=%s&utm_campaign=%s&utm_content=%s" "github" "readme" (ds "config").github_repo "%s" -}}
