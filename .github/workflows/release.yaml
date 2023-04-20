@@ -44,5 +44,7 @@ jobs:
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
+          charts_repo_url: https://roberc7.github.io/helm-charts
           config: cr.yaml
           skip-existing: true
+          charts_dir: charts
